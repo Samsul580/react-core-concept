@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
 	const friend = {
@@ -12,6 +13,7 @@ function App() {
 	}
 	return (
 		<div className="App">
+			<Counter></Counter>
 			<h1 style={style}>Best friend name: {friend.name}</h1>
 			<h1>Best friend profession: {friend.profession}</h1>
 			<Rounder></Rounder>
@@ -25,8 +27,26 @@ function App() {
 				<Product name={products[1].name} price={products[1].price}></Product>
 				<Product name={products[2].name} price={products[2].price}></Product>
 			</div>
+			<UserEffect></UserEffect>
 		</div>
 	);
+}
+// use state hook
+function  Counter() {
+	const [count, setCount] = useState(0);
+	const increaseCount = () => {
+		setCount(count + 1);
+	}
+	const decreaseCount = () => {
+		setCount(count-1)
+	}
+	return (
+		<div>
+			<h1>Movies:{count}</h1>
+			<button onClick={increaseCount}>Increase</button>
+			<button onClick={decreaseCount}>Decrease</button>
+		</div>
+	)
 }
 function Rounder() {
 	return (
@@ -44,6 +64,7 @@ function Singer(props) {
 		</div>
 	)
 }
+// use component for make some cards
 const products = [
 	{
 		name: 'Photoshop',
@@ -69,6 +90,25 @@ function Product(props) {
 			<h1>{props.name}</h1>
 			<h2>{props.price}</h2>
 			<button>Buy now</button>
+		</div>
+	)
+}
+// use effect
+function UserEffect() {
+	const [users, setUsers] = useState([]);
+	useEffect(()=> {
+		fetch('https://jsonplaceholder.typicode.com/users')
+		.then(res => res.json())
+		.then(data => setUsers(data))
+	},[])
+	return(
+		<div>
+			<h1>User: {users.length}</h1>
+			<ul>
+				{
+					users.map(user=>  <p key={user.id}>{user.name}</p>)
+				}
+			</ul>
 		</div>
 	)
 }
