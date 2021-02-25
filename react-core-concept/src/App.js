@@ -22,7 +22,7 @@ function App() {
 			<Singer name='Habib' job='singer'></Singer>
 			<Singer name='Imran' job='singer'></Singer>
 			<Singer name='Tahsan' job='singer and actor'></Singer>
-			<div style={{display:'flex', justifyContent: 'center'}}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<Product name={products[0].name} price={products[0].price}></Product>
 				<Product name={products[1].name} price={products[1].price}></Product>
 				<Product name={products[2].name} price={products[2].price}></Product>
@@ -32,13 +32,13 @@ function App() {
 	);
 }
 // use state hook
-function  Counter() {
+function Counter() {
 	const [count, setCount] = useState(0);
 	const increaseCount = () => {
 		setCount(count + 1);
 	}
 	const decreaseCount = () => {
-		setCount(count-1)
+		setCount(count - 1)
 	}
 	return (
 		<div>
@@ -96,17 +96,17 @@ function Product(props) {
 // use effect
 function UserEffect() {
 	const [users, setUsers] = useState([]);
-	useEffect(()=> {
+	useEffect(() => {
 		fetch('https://jsonplaceholder.typicode.com/users')
-		.then(res => res.json())
-		.then(data => setUsers(data))
-	},[])
-	return(
+			.then(res => res.json())
+			.then(data => setUsers(data))
+	}, [])
+	return (
 		<div>
 			<h1>User: {users.length}</h1>
 			<ul>
 				{
-					users.map(user=>  <p key={user.id}>{user.name}</p>)
+					users.map(user => <p key={user.id}>{user.name}</p>)
 				}
 			</ul>
 		</div>
